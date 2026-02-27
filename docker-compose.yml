@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   mysql:
     image: mysql:8.0
@@ -7,10 +8,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: 4633_db
-      ports:
-        - "3306:3306"
-      volumes:
-        - mysql4633_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql4633_data:/var/lib/mysql
 
-  volumes:
-    mysql4633_data:
+volumes:
+  mysql4633_data:
