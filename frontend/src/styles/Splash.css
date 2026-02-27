@@ -1,0 +1,53 @@
+html,body, #root {
+    height: 100%;
+ 
+  
+}
+
+
+h1{
+    position: absolute;
+    font-family: 'Fredoka One', sans-serif;
+    color: white;
+    border: 25px;
+    left:32%;
+    top:30%;
+    font-size: 9ch;
+    letter-spacing: .08em;
+}
+
+.splash-page{
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh; 
+  margin: 0;
+  background: linear-gradient(to bottom, #f5f4ff, #4535fd);
+  background-size: cover;
+  background-repeat: no-repeat;
+   
+}
+
+
+
+.splash-page .loading-container{
+   
+    width: 300px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+  
+}
+
+.splash-page .ball{
+    border-radius: 50%;
+    background-color:white;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 40px;
+
+}
+

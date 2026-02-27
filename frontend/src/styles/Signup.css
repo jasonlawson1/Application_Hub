@@ -1,0 +1,158 @@
+h1{
+    font-size: 4ch;
+    position: absolute;
+    left:23%;
+   top:1%;
+   color:rgb(0, 0, 0);
+    font-family: 'Fredoka One', sans-serif;
+     letter-spacing: .08em;
+}
+
+.background{
+    height:100%;
+    background: white;
+ 
+}
+
+.btn_primary{
+    width: 75px;
+    height: 45px;
+    border-radius: 12px;
+     border: none;
+    background-color: #4535fd;
+    box-shadow: 0 4px 6px rgb(0, 0, 0);
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.login_modal{
+    position: absolute;
+    background-color:rgb(178, 234, 255);
+    align-items: center;
+    justify-content: center;
+   display:flex;
+   top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   
+    border-radius:45px;
+    height:80%;
+    width:70%;
+}
+
+.login_modal_content{
+   
+   position:relative;
+    background-color:  rgb(178, 234, 255);
+    border-radius:45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:90%;
+    height:90%;
+}
+
+.left_side{
+    position:relative;
+    border-radius:45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+    width:50%;
+    height:100%;
+}
+
+.btn_primary{
+    position: absolute;
+    top:103%;
+    left:40%;
+    
+}
+
+.text_box{
+    border: none;
+    border-radius: 30px;
+    width: 20vw;
+    height: 30px;
+    padding: 10px;
+    background-color: white;
+    outline: none;
+   
+
+}
+
+label{
+    text-align: left;
+    font-weight: light;
+    font-size: 15px;
+}
+
+form{
+    position: absolute;
+    display:flex;
+    flex-direction: column;
+    gap: 15px;
+    left:10%;
+    justify-content: center;
+}
+
+.login_link{
+    position: absolute;
+    top:97%;
+    left:33%;
+    color: #6d6d6d;
+    font-size: smaller;
+}
+
+.right_side{
+    position:relative;
+    border-radius:45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    width:50%;
+    height:90%;
+    top:16px;
+    right:40px;
+}
+
+.on-computer{
+  width: 100%;
+  height:100%;
+  object-fit: contain;
+}
+
+.close_btn{
+   font-size:60px;
+   
+    
+    color: black;
+    background-color: transparent;
+    border-radius: 50px;
+    border: none;
+    font-weight: normal;
+    cursor: pointer;
+}
+.close_btn_container{
+    position: absolute;
+    top: 1px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error_message{
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    color:red;
+    font-size: smaller;
+}
+
