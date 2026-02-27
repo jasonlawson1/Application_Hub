@@ -8,10 +8,11 @@ A web based job application dashboard designed to help users manage their job se
 3. Database runs at `localhost:3306` with:
    - user: root
    - password: rootpassword
-   - db: project_db
+   - db: 4633_db
 4. Download MySQL Workbench
 5. Launch MySQL Workbench after installation.
    - Click the “+” icon next to MySQL Connections to create a new connection.
 6. Connect to Dockerized MySQL.
+
 
 
