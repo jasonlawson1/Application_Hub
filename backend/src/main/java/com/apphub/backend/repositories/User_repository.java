@@ -1,10 +1,10 @@
 package com.apphub.backend.repositories;
-import com.apphub.backend.models.Users;
 
-public class User_repository {
-    Users user;
-    
-    public User_repository(){
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import com.apphub.backend.models.User;
 
-    }
+@Repository
+public interface User_repository extends JpaRepository <User, Long>{
+    Boolean existsByEmail(String email);
 }

@@ -1,22 +1,29 @@
 package com.apphub.backend.models;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-public class Users {
+@Entity
+@Table(name="Users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String first;
     private String last;
     private String email;
     private String password;
-    private String confirm_password;
+  
 
-    public Users(){
-    
+    public User(String first, String last, String email, String password){
+        this.first= first;
+        this.last=last;
+        this.email=email;
+        this.password=password;
+       
     }
+
+    public User(){}
 
     public Long getID(){return id;}
     
@@ -41,9 +48,6 @@ public class Users {
     }
     public String getPassword(){return password;}
 
-    public void setConfirmPassword(String confirm_password){
-        this.confirm_password=confirm_password;
-    }
-    public String getConfirmPassword(){return confirm_password;}
+   
 
 }
