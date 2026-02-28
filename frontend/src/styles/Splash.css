@@ -5,7 +5,7 @@ html,body, #root {
 }
 
 
-h1{
+.splash h1{
     position: absolute;
     font-family: 'Fredoka One', sans-serif;
     color: white;
