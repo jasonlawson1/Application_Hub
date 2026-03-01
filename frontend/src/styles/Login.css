@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+.background{
+    font-family: 'Inter', sans-serif;
+    height:100%;
+    background: linear-gradient(to bottom, #f5f4ff, #4535fd);
+}
+.login_module h1{
+    top:3%;
+    font-size: 3.8ch;
+    position: absolute;
+    font-weight: 400;
+    color:rgb(255, 255, 255);
+    letter-spacing: .08em;
+    font-weight: 370;
+}
+
+.login_module{
+    left:30%;
+    top:10%;
+    position:relative;
+    background:  #766aff;
+    border-radius:45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:40%;
+    height:80%;
+}
+
+.error_message{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 15%;
+    left:50%;
+    text-align: center;
+    color:red;
+    font-size: smaller;
+}
+
+.login_btn{
+    position: absolute;
+    width: 75px;
+    height: 45px;
+    border-radius: 12px;
+     border: none;
+    background-color: #ffffff;
+    left:40%;
+    top:90%;
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+
+.text_box{
+    border: none;
+    border-radius: 30px;
+    width: 20vw;
+    height: 30px;
+    padding: 10px;
+    background-color: white;
+    outline: none;
+   
+
+}
+
+.label{
+   
+    text-align: left;
+    font-weight: light;
+    font-size: 15px;
+    color:white;
+}
+.login_module form{
+    width:50%;
+    height:50%;
+    display: flex;
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    gap: 15px;
+    left:-1%;
+    justify-content: center;
+}
+

@@ -1,19 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 html,body, #root {
     height: 100%;
- 
+     font-family: 'Inter', sans-serif;
   
 }
 
 
 .splash h1{
     position: absolute;
-    font-family: 'Fredoka One', sans-serif;
+
     color: white;
     border: 25px;
-    left:32%;
-    top:30%;
+    left:30%;
+    top:25%;
     font-size: 9ch;
     letter-spacing: .08em;
+    font-weight: 100;
 }
 
 .splash-page{
