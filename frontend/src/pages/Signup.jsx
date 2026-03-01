@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Signup.css";
 
+
 function Signup() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -67,8 +68,8 @@ function Signup() {
 
   return (
 <div className="background">
-    <div className="login_modal">
-      <div className="login_modal_content">
+    <div className="signup_modal">
+      <div className="signup_modal_content">
         <div className="close_btn_container">
           <button
             className="close_btn"
@@ -139,7 +140,7 @@ function Signup() {
               onChange={handleChange}
             />
 
-            <button type="submit" className="btn_primary">
+            <button type="submit" className="signup_btn">
               Sign up
             </button>
           </form>
@@ -153,7 +154,7 @@ function Signup() {
         {/* Right side */}
         <div className="right_side">
           <img
-            src="src/assets/images/on_computer.png"
+            src="src/assets/images/resume_girl.png"
             alt="girl on computer"
             className="on-computer"
           />

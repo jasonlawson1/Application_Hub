@@ -1,11 +1,7 @@
-h1{
-    font-size: 4ch;
-    position: absolute;
-    left:23%;
-   top:1%;
-   color:rgb(0, 0, 0);
-    font-family: 'Fredoka One', sans-serif;
-     letter-spacing: .08em;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+body{
+     font-family: 'Inter', sans-serif;
+    
 }
 
 .background{
@@ -14,22 +10,37 @@ h1{
  
 }
 
-.btn_primary{
+.left_side h1{
+    font-size: 3ch;
+    position: absolute;
+    font-weight: 370;
+    left:23%;
+    top:1%;
+    color:rgb(255, 255, 255);
+   
+     letter-spacing: .08em;
+}
+
+
+
+.signup_btn{
+    position: absolute;
     width: 75px;
     height: 45px;
     border-radius: 12px;
      border: none;
-    background-color: #4535fd;
-    box-shadow: 0 4px 6px rgb(0, 0, 0);
-    color: white;
+    background-color: #ffffff;
+    left:40%;
+    top:103%;
+    color: rgb(0, 0, 0);
     font-size: 15px;
     cursor: pointer;
     font-size: 15px;
 }
 
-.login_modal{
+.signup_modal{
     position: absolute;
-    background-color:rgb(178, 234, 255);
+    background: linear-gradient(to bottom, #f5f4ff, #4535fd);
     align-items: center;
     justify-content: center;
    display:flex;
@@ -42,15 +53,15 @@ h1{
     width:70%;
 }
 
-.login_modal_content{
+.signup_modal_content{
    
    position:relative;
-    background-color:  rgb(178, 234, 255);
+    background:  #766aff;
     border-radius:45px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width:90%;
+    width:85%;
     height:90%;
 }
 
@@ -60,17 +71,12 @@ h1{
     display: flex;
     align-items: center;
     justify-content: center;
-   
+    
     width:50%;
     height:100%;
 }
 
-.btn_primary{
-    position: absolute;
-    top:103%;
-    left:40%;
-    
-}
+
 
 .text_box{
     border: none;
@@ -88,9 +94,10 @@ label{
     text-align: left;
     font-weight: light;
     font-size: 15px;
+    color:white;
 }
 
-form{
+.left_side form{
     position: absolute;
     display:flex;
     flex-direction: column;
@@ -103,7 +110,7 @@ form{
     position: absolute;
     top:97%;
     left:33%;
-    color: #6d6d6d;
+    color: #ffffff;
     font-size: smaller;
 }
 
@@ -118,19 +125,22 @@ form{
     height:90%;
     top:16px;
     right:40px;
+  
 }
 
 .on-computer{
   width: 100%;
   height:100%;
-  object-fit: contain;
+  object-fit: auto;
+  border-radius: 45px;
+ 
 }
 
 .close_btn{
    font-size:60px;
    
     
-    color: black;
+    color: rgb(255, 255, 255);
     background-color: transparent;
     border-radius: 50px;
     border: none;
