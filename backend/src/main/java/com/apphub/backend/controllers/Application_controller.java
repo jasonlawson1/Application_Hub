@@ -31,7 +31,7 @@ public class Application_controller {
        
              
              if(application_service.create_application(request)){
-                return ResponseEntity.ok("Application saved successfully");
+                return ResponseEntity.ok(Map.of("message", "Application saved successfully"));
              }
              else{
                 return ResponseEntity

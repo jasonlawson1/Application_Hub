@@ -6,6 +6,8 @@ function Add_application(){
 
 const navigate=useNavigate();
 const userId = localStorage.getItem("userId");
+localStorage.setItem("formType", "application");
+
 const [formData, setFormData] = useState({
     company: "",
     jobTitle: "",
@@ -14,7 +16,6 @@ const [formData, setFormData] = useState({
     deadline:"",
     notes:"",
     status:"",
-    
 });
 
 
@@ -40,6 +41,9 @@ const handleSubmit = async (e)=>{
 
         const data= await response.json();
         if(response.ok){
+            
+            localStorage.setItem("userId", userId);
+           
             navigate("/Succesfully_submitted")
         }
         else{

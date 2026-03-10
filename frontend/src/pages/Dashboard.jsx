@@ -33,7 +33,6 @@ return(
         <p className="welcome_message">Welcome, {first_name}👋</p>
         <div className="quick_actions_box">
             <button type="button" className="quick_actions_btn"  onClick={() => navigate("/Add_application")}>Add new application.</button>
-            <button type="submit" className="quick_actions_btn">Add new interview.</button>
             <button type="submit" className="quick_actions_btn">Add new event.</button>
         </div>
        
@@ -70,7 +69,7 @@ return(
        
         <div className="upcoming_interviews">
             <p>Upcoming Events</p>
-            <p>(list interviews here)</p>
+            <p>(list interviews and events here)</p>
         </div>
 
 
