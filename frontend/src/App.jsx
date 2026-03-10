@@ -4,6 +4,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Dashboard from"./pages/Dashboard";
 import Add_application from "./pages/Add_application";
+import Succesfully_submitted from "./pages/Succesfully_submitted";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" element={<Login />} />
          <Route path="/Dashboard" element={<Dashboard />} />
          <Route path="/Add_application" element={<Add_application />} />
+         <Route path="/Succesfully_submitted" element={<Succesfully_submitted />} />
       </Routes>
     </BrowserRouter>
   );
