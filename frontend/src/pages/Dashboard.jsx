@@ -36,7 +36,7 @@ return(
             <button type="submit" className="quick_actions_btn">Add new event.</button>
         </div>
        
-        <Link to="/applications" className="app_card_link">
+        <Link to="/Manage_applications" className="app_card_link">
             <div className="application_card">
                 <h2>📄Your applications</h2>
                 <p> View and manage your applications</p>

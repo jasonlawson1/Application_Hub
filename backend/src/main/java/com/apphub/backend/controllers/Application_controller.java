@@ -49,9 +49,10 @@ public class Application_controller {
         return ResponseEntity.ok(application_service.get_all_applications());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> get_application_by_id(@PathVariable Long id) {
-        Application application = application_service.get_application_by_id(id);
+    // this should return "ResponseEntity<List<Application>>" to get a list of all the applicatons of the user with that specifc userId
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> get_application_by_userId(@PathVariable Long userId) {
+        Application application = application_service.get_application_by_id(userId);
 
         if (application != null) {
             return ResponseEntity.ok(application);
