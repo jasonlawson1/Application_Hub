@@ -64,7 +64,7 @@ transform:translateY(-6px);
     height: 250px;
     border-radius: 12px;
     border: none;
-     background: radial-gradient(circle, #8c81ff, #4535fd);
+    background: radial-gradient(circle, #8c81ff, #4535fd);
     background-size: cover;
     top:20%;
     left:15%;
