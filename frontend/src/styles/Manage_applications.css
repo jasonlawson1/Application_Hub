@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+.Manage_applications_background{
+    font-family: 'Inter', sans-serif;
+    height:100%;
+    background: white;
+   
+}
+
+.Manage_applications_background h1{
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 6ch;
+    color:#4535fd;
+    letter-spacing: .01em;
+    font-weight: 600;
+}
+
+.filter_box{
+    width:250px;
+    height:50px;
+    left:10%;
+}
+
+.filter_box h2{
+    text-align: left;
+   
+    font-family: 'Inter', sans-serif;
+   
+    color:#4535fd;
+    letter-spacing: .01em;
+}
+
+.filter_status_dropdown{
+    border-width: 3px;
+    border-color: #4535fd;
+    width:260px;
+    height:40px;
+    border-radius: 45px;
+    font-family: 'Inter', sans-serif;
+    font-size:1.6ch;
+    color:#4535fd;
+    font-weight: 700;
+}
+
+.filter_box{
+    width:20%;
+    height:20%;
+    
+}
+
+.table_box_background{
+    position: absolute;
+    top: 63%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:95%;
+    height:70%;
+    background: radial-gradient(circle, #ffffff, #4535fd);
+    border-radius:45px;
+}
+
+.table_box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:85%;
+    height:90%;
+    background: white;
+    border-radius:45px;
+}
+
+
+

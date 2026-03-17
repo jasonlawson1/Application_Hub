@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Dashboard from"./pages/Dashboard";
 import Add_application from "./pages/Add_application";
 import Succesfully_submitted from "./pages/Succesfully_submitted";
+import Manage_applications from "./pages/Manage_applications";
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Add_application" element={<Add_application />} />
           <Route path="/Succesfully_submitted" element={<Succesfully_submitted />} />
+          <Route path="/Manage_applications" element={<Manage_applications/>} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

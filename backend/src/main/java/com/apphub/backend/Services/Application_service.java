@@ -49,6 +49,9 @@ public class Application_service {
         return application_repository.findAll();
     }
 
+    //get applications by user_id
+    
+
     public Application get_application_by_id(Long id) {
         Optional<Application> application = application_repository.findById(id);
         return application.orElse(null);
