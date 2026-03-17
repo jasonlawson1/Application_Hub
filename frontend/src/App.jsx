@@ -18,6 +18,7 @@ function App() {
          <Route path="/Add_application" element={<Add_application />} />
          <Route path="/Succesfully_submitted" element={<Succesfully_submitted />} />
         <Route path="/Manage_applications" element={<Manage_applications/>} />
+        <Route path="/Edit_application/:id" element={<Add_application/>} />
       </Routes>
     </BrowserRouter>
   );

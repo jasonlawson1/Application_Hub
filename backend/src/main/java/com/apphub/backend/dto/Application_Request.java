@@ -1,5 +1,5 @@
 package com.apphub.backend.dto;
-
+//This class represents application data the user sends to the server
 import java.time.LocalDate;
 
 
