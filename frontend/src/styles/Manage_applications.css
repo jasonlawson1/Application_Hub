@@ -4,6 +4,7 @@
     font-family: 'Inter', sans-serif;
     height:100%;
     background: white;
+    
    
 }
 
@@ -50,26 +51,131 @@
 }
 
 .table_box_background{
-    position: absolute;
-    top: 63%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width:95%;
-    height:70%;
+    margin: 60px auto;
+    width:80%;
+    margin:auto;
     background: radial-gradient(circle, #ffffff, #4535fd);
     border-radius:45px;
+    padding:50px;
 }
 
 .table_box{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width:85%;
-    height:90%;
+    padding:50px;
+    width:80%;
+    margin:auto;
     background: white;
     border-radius:45px;
+    position: relative;
+}
+
+.applications_table th,
+.applications_table td{
+    border-bottom: 1px solid rgb(185, 185, 185);
+    padding: 10px;
+    text-align: left;
+    font-size: 1.5ch;
+    word-wrap: break-word;
+   
+}
+
+.applications_table{
+    width:100%;
+    border-collapse: collapse;
+}
+
+.status{
+   padding:6px 10px;
+}
+
+.applied{
+    background-color: rgb(132, 210, 255);
+}
+.interview{
+    background-color: rgb(165, 255, 165);
+}
+.offered{
+    background-color: rgb(224, 186, 255);
+}
+.rejected{
+    background-color: rgb(255, 180, 180);
+}
+
+.kebab{
+    border: none;
+    background-color: white;
+    font-size: x-large;
+    color:black;
+}
+.edit, .delete{
+    border:none;
+    background-color:white;
+    text-align: left;
+    cursor: pointer;
+    padding: 6px;
+   
+}
+
+.kebab_dropdown{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left:85%;
+    top:4%;
+    
+    
+}
+td{
+    position: relative;
+}
+
+.delete_modal{
+    position: fixed;
+    display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+  background: rgba(216, 216, 216, 0.2);
+  
+
+    
+}
+
+.delete_modal_content{
+    margin:auto;
+    display:flex;
+    background-color: rgb(255, 255, 255);
+    border-radius: 45px;
+    height:350px;
+    width:350px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    border: 5px solid #4535fd;
 }
 
 
 
+.delete_modal_content p{
+    text-align:center;
+    margin-top:40px;
+    color: #4535fd;
+    font-size: 1.8ch;
+   
+}
+
+.delete_modal_buttons_box{
+    display:flex;
+    margin:auto;
+    gap: 50px;
+}
+
+.delete_modal_buttons{
+    border: none;
+    width:80px;
+    height:45px;
+    border-radius:35px;
+    color:white;
+    background-color: #4535fd;
+}

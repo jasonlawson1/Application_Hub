@@ -35,6 +35,7 @@ public class Application_service {
             request.getLocation(),
             request.getNotes()
             );
+            application.setId(application.getId());
         application.setUser(user);
         if(application_repository.save(application)!=null){
             return true;
@@ -50,6 +51,10 @@ public class Application_service {
     }
 
     //get applications by user_id
+    public List<Application> get_applications_by_userId(Long userId){
+       
+        return application_repository.findByUserId(userId);
+    }
     
 
     public Application get_application_by_id(Long id) {

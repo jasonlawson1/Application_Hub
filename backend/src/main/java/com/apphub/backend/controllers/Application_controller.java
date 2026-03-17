@@ -38,10 +38,6 @@ public class Application_controller {
                 .status(HttpStatus.CONFLICT)
                 .body(Map.of("message", "Application was not submitted"));
              }
-        
-        
-             
-        
     }
 
     @GetMapping
@@ -49,15 +45,28 @@ public class Application_controller {
         return ResponseEntity.ok(application_service.get_all_applications());
     }
 
-    // this should return "ResponseEntity<List<Application>>" to get a list of all the applicatons of the user with that specifc userId
+    //get all the users applications
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> get_application_by_userId(@PathVariable Long userId) {
-        Application application = application_service.get_application_by_id(userId);
+        List<Application> application_list = application_service.get_applications_by_userId(userId);
 
-        if (application != null) {
-            return ResponseEntity.ok(application);
+        if (application_list != null) {
+            return ResponseEntity.ok(application_list);
         }
 
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(Map.of("message", "Application not found"));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> get_application_by_id (@PathVariable Long id){
+
+        Application application = application_service.get_application_by_id(id);
+
+        if(application!=null){
+            return ResponseEntity.ok(application);
+        }
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(Map.of("message", "Application not found"));

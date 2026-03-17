@@ -1,12 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate,Link } from "react-router-dom";
 import "../styles/Add_application.css";
+import { useParams } from "react-router-dom";
 
 function Add_application(){
 
 const navigate=useNavigate();
 const userId = localStorage.getItem("userId");
 localStorage.setItem("formType", "application");
+const { id } = useParams();
+
+useEffect(()=>{
+    const editApplication = async ()=> {
+        try{
+            if(!id) return;
+            const response = await fetch(`http://localhost:8081/api/applications/${id}`);
+            const data = await response.json();
+            setFormData(data);
+        }
+        catch(error){
+            console.log(error);
+        }
+    };
+editApplication();
+}, [id]);
+
 
 const [formData, setFormData] = useState({
     company: "",
@@ -28,9 +46,11 @@ const handleChange = (e)=>{
 
 const handleSubmit = async (e)=>{
     e.preventDefault();
+    const method = id? "PUT" : "POST";
+    const url = id? `http://localhost:8081/api/applications/${id}` :`http://localhost:8081/api/applications`;
     try{
-        const response = await fetch("http://localhost:8081/api/applications",{
-            method: "POST",
+        const response = await fetch(url,{
+            method: method,
             headers: {
                 "Content-Type": "application/json"
             },
@@ -163,7 +183,7 @@ return(
                             <option value="Applied">Applied</option>
                             <option value="Interview">Interview</option>
                             <option value="Rejected">Rejected</option>
-                            <option value="Offer">Offer</option>
+                            <option value="Offered">Offered</option>
                         </select>
                     </div>
 
