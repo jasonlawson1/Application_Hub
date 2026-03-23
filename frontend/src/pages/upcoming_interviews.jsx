@@ -100,7 +100,7 @@ function Upcoming_interviews() {
             ) : (
               interviews.map((interview) =>
                 editingId === interview.id ? (
-                  // Edit mode row
+                
                   <tr key={interview.id}>
                     <td>
                       <input
@@ -204,7 +204,7 @@ function Upcoming_interviews() {
                     </td>
                   </tr>
                 ) : (
-                  // View mode row
+                 
                   <tr key={interview.id}>
                     <td>{interview.company}</td>
                     <td>{interview.jobTitle}</td>

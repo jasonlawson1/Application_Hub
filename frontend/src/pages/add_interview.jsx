@@ -20,7 +20,6 @@ function Add_interview() {
     notes: "",
   });
 
-  // Fetch user's applications to populate the dropdown
   useEffect(() => {
     const fetchApplications = async () => {
       try {
