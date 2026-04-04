@@ -4,63 +4,102 @@ import { useParams } from "react-router-dom";
 import "../styles/Add_event.css";
 
 function Add_event(){
-   const { date } = useParams();
+   const { id, date } = useParams();
    const navigate = useNavigate();
-   const [userId] = useState(() => Number(localStorage.getItem("userId")));
+   const userId =  Number(localStorage.getItem("userId"));
    const [errorMessage, setErrorMessage] = useState("");
-  
 
    const [formData, setFormData] = useState({
     title: "",
     startTime: "",
     location:"",
     notes: "",
+    date:""
    
    });
-    
+
    const handleChange = (e) =>{
       setFormData({...formData, [e.target.name]: e.target.value});
    };
 
+    const formatDate = (date) =>{
+        const [year, month, day] = date.split("-");
+
+        return new Date(year, month - 1, day).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        });
+   };
+
+    const displayDate = formData.date || date;
+   
+    useEffect(()=> {
+        const editEvent = async ()=>{
+            try{
+                if(!id)return;
+                const response = await fetch(`http://localhost:8081/api/events/${id}`);
+                const data = await response.json();
+                setFormData({
+                    ...data,
+                    date: data.date
+                });
+                
+            }
+            catch(error){
+                console.error("error fetching event:", error);
+            }
+        };
+        editEvent();
+    }, [id]);
+    
+  
+
+   
+   
+   
+
    const handleSubmit = async(e)=>{
         e.preventDefault();
-        if(!formData.title){
-            setErrorMessage("Please fill in the title.");
+        if(!formData.title ||!formData.startTime){
+            setErrorMessage("Please fill in title and start time fields.");
             return;
         }
         try {
-            const response = await fetch(`http://localhost:8081/api/events/create_event`,{
-                method: "POST",
+            const url = id? `http://localhost:8081/api/events/${id}` : `http://localhost:8081/api/events/create_event`;
+            const method = id? "PUT" : "POST";
+            const response = await fetch(url,{
+                method: method,
                 headers: {
                 "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     ...formData,
-                    date,
+                    date: formData.date || date,
                     userId
                 })
             });
 
+            const data = await response.json();
+
             if(response.ok){
-                //save new event
-                const newEvent = {
+                                //make a list of all events
+                const allEvents = JSON.parse(localStorage.getItem("events")) || [];
+
+                if(method === "POST"){
+                    //save new event
+                     const newEvent = {
                     ...formData,
-                    date: date,
+                    //date: data.date||date,
                     userId: userId
                 };
 
-                //make a list of all events
-                const allEvents = JSON.parse(localStorage.getItem("events")) || [];
-
                 //update the events
-                const updatedEvents = [
-                    ...allEvents,
-                    newEvent
-                ];
-
-
-                // turns list into string
+                const updatedEvents = [...allEvents, newEvent];
+                 // turns list into string
                 localStorage.setItem("events", JSON.stringify(updatedEvents));
+                } 
+               
                 
                 const hasSeenEventSuccessPage = (localStorage.getItem("seenEventSuccessPage"));
                 if(!hasSeenEventSuccessPage){
@@ -69,10 +108,11 @@ function Add_event(){
                     navigate("/Succesfully_submitted");
                 }
                 else{
-                    navigate("/Dashboard");
+                    navigate("/Manage_events");
                 }
                 
             }
+
 
         } catch (error) {
             console.log(error);
@@ -84,10 +124,11 @@ function Add_event(){
 
     return(
         
-        <div className="Add_event_background">
+        <div className="background">
+            <div className="page_content">
             <h1>Add Event</h1>
             <div className="modal">
-                    <p className="date_title">{date}</p>
+                    <p className="date_title">{displayDate ? formatDate(displayDate) : ""}</p>
                     {errorMessage &&<p className="error_message">{errorMessage}</p>}
                     
                     <form id="event_form" className="event_form" onSubmit={handleSubmit}>
@@ -133,12 +174,13 @@ function Add_event(){
 
                         <div className="save_cancel_container">
                             <button type="button" className="save_cancel_buttons" onClick={()=>navigate("/Dashboard")}>Cancel</button>
-                            <button type="submit" className="save_cancel_buttons">Save Application</button>
+                            <button type="submit" className="save_cancel_buttons">Save event</button>
                         </div>
                     </form>
                    
 
              
+                </div>
             </div>
         </div>
 

@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 function Add_application(){
 
 const navigate=useNavigate();
-const [userId] = useState(() => Number(localStorage.getItem("userId")));
+const userId = Number(localStorage.getItem("userId"));
 localStorage.setItem("formType", "application");
 const { id } = useParams();
 
@@ -95,7 +95,8 @@ const handleSubmit = async (e)=>{
 
 
 return(
-    <div className="Add_application_background">
+    <div className="background">
+        <div className="page_content">
         <h1>Create New Application</h1>
         <div className="job_info_section">
             <p className="section_header">Job information</p>
@@ -212,7 +213,7 @@ return(
 
 
 
-
+        </div>
     </div>
 
     
