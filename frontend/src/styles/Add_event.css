@@ -27,7 +27,6 @@
     color:#4535fd;
     letter-spacing: .01em;
     font-weight: 300;
-    
     position: absolute;
 }
 
@@ -82,12 +81,12 @@ label{
 .modal .error_message{
     
     left:50%;
-    top:20%;
+    top:6%;
    transform: translate(-50%, -50%);
 }
 
 .date_title{
-    margin: 0 auto;
+    margin: 10px auto;
     font-size: 4ch;
     color: white;
     white-space: nowrap;

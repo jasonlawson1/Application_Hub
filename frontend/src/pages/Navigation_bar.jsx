@@ -18,7 +18,9 @@ function Navigation_bar(){
                 <FaHome size={30} />
             </button>
 
-            <Outlet/>
+            <div className="page_content">
+                <Outlet />
+            </div>
         </div>
     ); 
 }

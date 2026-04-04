@@ -13,6 +13,16 @@ public class Events_request {
     private LocalTime startTime;
     private String notes;
 
+    public Events_request(String title, String location, LocalDate date, LocalTime startTime, String notes, Long userId, Long id) {
+        this.title = title;
+        this.location = location;
+        this.date = date;
+        this.startTime = startTime;
+        this.notes = notes;
+        this.userId = userId;
+        this.id = id;
+    }
+
     public Long getId(){
         return id;
     }

@@ -1,24 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-.Add_application_background{
-    font-family: 'Inter', sans-serif;
-    height:100vh;
-  
-    display: flex;
-    justify-content: center;
-    
-}
 
-.Add_application_background h1{
-    position: absolute;
-    font-family: 'Inter', sans-serif;
-    font-size: 4ch;
-    color:#4535fd;
-    letter-spacing: .01em;
-    text-align: center;
-    
-    
-}
 
 .job_info_section{
     width:40%;
@@ -45,7 +27,7 @@
    
 }
 
-.Add_application_background label{
+.application_boxes label{
     color:#4535fd;
     font-size: large;
     display: flex;

@@ -12,6 +12,7 @@ function Manage_applications(){
     const[openMenuId, setOpenMenuId] = useState(null);
     const [showDeleteModule, setShowDeleteModule] = useState(false);
     const[deletedAppId, setDeletedAppId] = useState(null);
+    const [noApplicationsMessage, setNoApplicationsMessage] = useState("");
 
     const filteredApplications = applications.filter((app)=>{
         if(statusFilter==="All")return true;
@@ -23,7 +24,15 @@ function Manage_applications(){
             try{
                 const response = await fetch(`http://localhost:8081/api/applications/user/${userId}`);
                 const data = await response.json();
-                setApplications(data);
+                
+
+                if(!response.ok){
+                    setNoApplicationsMessage("No applications found.");
+                    setApplications([]);
+                    return;
+                }
+                setApplications(Array.isArray(data) ? data :[]);
+
             }
             catch(error){
                 console.error("Error fetching applications:", error);
@@ -36,13 +45,18 @@ function Manage_applications(){
 
     const handleDelete = async ()=>{
         try {
-             await fetch(`http://localhost:8081/api/applications/${deletedAppId}`, {
+            const response =await fetch(`http://localhost:8081/api/applications/${deletedAppId}`, {
             method: "DELETE"
         });
 
-        setApplications(prev=>prev.filter(app=>app.id!==deletedAppId));
-        setShowDeleteModule(false);
+        if(response.ok){
+            setApplications(prev=>prev.filter(app=>app.id!==deletedAppId));
+            setShowDeleteModule(false);
+            return;
+        }
+    
 
+        
         } catch (error) {
             console.log(error);
         }
@@ -52,7 +66,8 @@ function Manage_applications(){
 
 
     return(
-        <div className="Manage_applications_background">
+        <div className="background">
+            <div className="page_content">
             <h1>Manage applications</h1>
             <div className="quick_actions_box">
                 <button type="button" className="quick_actions_btn"  onClick={() => navigate("/Add_application")}>Add new application.</button>
@@ -89,8 +104,14 @@ function Manage_applications(){
                             </thead>
 
                         <tbody>
-                            {filteredApplications.map((app)=>(
+                            {filteredApplications.length===0 ?(
+                                <tr>
+                                    <td colSpan="8" className="no_applications_message">No applications found.</td>
+                                </tr>
+                            ):
+                            (filteredApplications.map((app)=>(
                                 <tr key={app.id}>
+                                    
                                     <td>
                                         <span className={`status ${app.status.toLowerCase()}`}>
                                             {app.status}
@@ -112,7 +133,7 @@ function Manage_applications(){
                                                 <button className="edit" type="button" onClick={()=>navigate(`/Edit_application/${app.id}`)}>Edit</button>
 
                                                 <button className="delete" type="button" onClick={()=> 
-                                                {setShowDeleteModule(true)
+                                                {setShowDeleteModule(true);
                                                 setDeletedAppId(app.id);
                                                 }}>Delete</button>
                                             </div>
@@ -120,15 +141,15 @@ function Manage_applications(){
                                     </td>
                                 
                                 </tr>
-                            ))}
+                            )))}
                         </tbody>
                     </table>
 
                        {showDeleteModule &&(
                         <div className="delete_modal">
                             <div className="delete_modal_content">
-                                <p>Are you sure you want to delete this application?</p>
-                                <div className="delete_modal_buttons_box">
+                                <span>Are you sure you want to delete this application?</span>
+                                <div className="delete_modal_actions">
                                     <button type="button" className="delete_modal_buttons" 
                                     onClick={()=>{
                                         handleDelete();
@@ -146,7 +167,7 @@ function Manage_applications(){
              
             
                     
-                    
+            </div>        
 
         </div>
 

@@ -29,6 +29,7 @@ function App() {
           <Route path="/Add_interview" element={<Add_interview />} />
           <Route path="/Add_event/:date" element={<Add_event/>} />
           <Route path="/Edit_application/:id" element={<Add_application />} />
+          <Route path="/Edit_event/:id" element={<Add_event />} />
           <Route path="/Manage_events" element={<Manage_events />} />
         </Route>
       </Routes>

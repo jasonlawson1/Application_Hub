@@ -106,7 +106,8 @@ function Dashboard() {
   };
 
   return (
-    <div className="dashboard_background">
+    <div className="background">
+      <div className="page_content">
       <h1>Application Hub</h1>
       <p className="welcome_message">Welcome, {first_name}👋</p>
 
@@ -201,7 +202,7 @@ function Dashboard() {
    
 
 
-
+      </div>
     </div>
   );
 }

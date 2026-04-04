@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="Events")
-public class Events {
+public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,9 +25,9 @@ public class Events {
     private LocalTime startTime;
     private String notes;
 
-    public Events(){}
+    public Event(){}
 
-    public Events(String title,  String location, LocalDate date, LocalTime startTime, String notes){
+    public Event(String title,  String location, LocalDate date, LocalTime startTime, String notes){
         this.title = title;
         this.location = location;
         this.date = date;

@@ -1,5 +1,6 @@
 package com.apphub.backend.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,15 +45,20 @@ public class Application_controller {
     // Returns all applications belonging to a specific user
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> get_applications_by_userId(@PathVariable Long userId) {
-        List<Application> applications = application_service.get_applications_by_user_id(userId);
+        try{
+            List<Application> applications = application_service.get_applications_by_user_id(userId);
+            return ResponseEntity.ok(applications==null ? new ArrayList<>(): applications);
 
-        if (applications != null && !applications.isEmpty()) {
-            return ResponseEntity.ok(applications);
         }
-
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(Map.of("message", "No applications found for this user"));
+        catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Map.of(
+                        "message", "Backend error while fetching applications",
+                        "error", e.getMessage()
+                ));
+        }
+      
+        
     }
     
     // Returns one application so user can edit it
