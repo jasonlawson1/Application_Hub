@@ -122,7 +122,7 @@ function Dashboard() {
         <button
           type="button"
           className="quick_actions_btn"
-          onClick={() => navigate("/ai_resume")}
+          onClick={() => navigate("/Upgrade_resume")}
         >
           Upgrade your resume with AI.
         </button>

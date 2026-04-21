@@ -176,3 +176,18 @@ textarea{
     color:white;
     background-color: #4535fd;
 }
+
+.modal{
+    position: absolute;
+    height:85%;
+    width:40%;
+    background: radial-gradient(circle, #afbeff, #4535fd);
+    border-radius:45px;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    display:flex;
+    justify-content: center;
+    
+}
+
