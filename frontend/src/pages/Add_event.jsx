@@ -80,7 +80,7 @@ function Add_event(){
                 })
             });
 
-            const data = await response.json();
+        
 
             if(response.ok){
                                 //make a list of all events

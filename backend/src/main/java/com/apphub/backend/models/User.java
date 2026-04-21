@@ -14,10 +14,13 @@ public class User {
 
     private String first;
     private String last;
+
+    @Column(nullable = false)
     private String email;
+
     private String password;
     
-     @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private List<Application> applications;
 
 

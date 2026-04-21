@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import "../styles/Add_application.css";
 import { useParams } from "react-router-dom";
 
@@ -42,7 +42,7 @@ const handleChange = (e)=>{
         ...formData,
         [e.target.name]: e.target.value
     });
-}
+};
 
 const handleSubmit = async (e)=>{
     e.preventDefault();

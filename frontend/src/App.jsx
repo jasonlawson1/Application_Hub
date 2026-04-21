@@ -11,6 +11,7 @@ import Forgot_password from "./pages/Forgot_password";
 import Navigation_bar from "./pages/Navigation_bar";
 import Add_event from "./pages/Add_event";
 import Manage_events from "./pages/Manage_events";
+import Upgrade_resume from "./pages/Upgrade_resume";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/Edit_application/:id" element={<Add_application />} />
           <Route path="/Edit_event/:id" element={<Add_event />} />
           <Route path="/Manage_events" element={<Manage_events />} />
+          <Route path="/Upgrade_resume" element={<Upgrade_resume />} />
         </Route>
       </Routes>
     </BrowserRouter>
