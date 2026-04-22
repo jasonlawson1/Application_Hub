@@ -98,7 +98,7 @@ function Dashboard() {
   const formatDate = (dateStr) => {
     if (!dateStr) return "";
     const date = new Date(dateStr);
-    eturn date.toLocaleDateString("en-US", {
+    return date.toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
       year: "numeric",
