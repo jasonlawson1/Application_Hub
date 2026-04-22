@@ -62,7 +62,7 @@ function Dashboard() {
   const fetchStats = async () => {
     try {
       const appRes = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/applications/user/${userId}`
+        `http://localhost:8081/api/applications/user/${userId}`
       );
       const applications = await appRes.json();
 
@@ -80,7 +80,7 @@ function Dashboard() {
 
   const fetchUpcomingInterviews = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/interviews/upcoming`);
+      const res = await fetch(`http://localhost:8081/api/interviews/upcoming`);
       const data = await res.json();
       setUpcomingInterviews(data);
     } catch (error) {
@@ -98,7 +98,7 @@ function Dashboard() {
   const formatDate = (dateStr) => {
     if (!dateStr) return "";
     const date = new Date(dateStr);
-    return date.toLocaleDateString("en-US", {
+    eturn date.toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
       year: "numeric",
@@ -124,7 +124,7 @@ function Dashboard() {
           className="quick_actions_btn"
           onClick={() => navigate("/Upgrade_resume")}
         >
-          Upgrade your resume with AI.
+          Upload your resume.
         </button>
        
       </div>

@@ -18,7 +18,6 @@ public class Upgrade_resume {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(nullable = false)
     private String jobPosition;
 
     @Column(nullable = false)
@@ -37,6 +36,15 @@ public class Upgrade_resume {
     public Upgrade_resume(User user, String jobPosition, String fileUrl, LocalDateTime uploadedAt, String fileName, String fileType, double fileSize) {
         this.user = user;
         this.jobPosition = jobPosition;
+        this.fileUrl = fileUrl;
+        this.uploadedAt = uploadedAt;
+        this.fileName = fileName;
+        this.fileType = fileType;
+        this.fileSize = fileSize;
+    }
+
+    public Upgrade_resume(User user, String fileUrl, LocalDateTime uploadedAt, String fileName, String fileType, double fileSize) {
+        this.user = user;
         this.fileUrl = fileUrl;
         this.uploadedAt = uploadedAt;
         this.fileName = fileName;
