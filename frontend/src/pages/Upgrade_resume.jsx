@@ -47,7 +47,7 @@ function Upgrade_resume() {
             setIsProcessing(true);
             setSteps(null);
 
-            const response = await fetch("http://localhost:8081/api/upgrade_resume/upload", {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/upgrade_resume/upload`, {
                 method:"POST",
                 body: formData,
                 signal: abortRef.current.signal
@@ -60,7 +60,7 @@ function Upgrade_resume() {
                 
                 const checkStatus = async ()=>{
                     try {
-                        const getUrlResponse = await fetch(`http://localhost:8081/api/upgrade_resume/${fileId}`,
+                        const getUrlResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/upgrade_resume/${fileId}`,
                             {signal: abortRef.current.signal}
                         );
                         if(getUrlResponse.ok){

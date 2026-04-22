@@ -14,7 +14,7 @@ function Upcoming_interviews() {
 
   const fetchInterviews = async () => {
     try {
-      const response = await fetch(`http://localhost:8081/api/interviews`);
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/interviews`);
       const data = await response.json();
       setInterviews(data);
     } catch (error) {
@@ -25,7 +25,7 @@ function Upcoming_interviews() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this interview?")) return;
     try {
-      const response = await fetch(`http://localhost:8081/api/interviews/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/interviews/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -56,7 +56,7 @@ function Upcoming_interviews() {
 
   const handleEditSave = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8081/api/interviews/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/interviews/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editFormData),

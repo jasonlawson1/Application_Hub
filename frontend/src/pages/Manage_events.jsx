@@ -21,7 +21,7 @@ function Manage_events(){
 
     const handleDelete = async () =>{
         try{
-            const response = await fetch(`http://localhost:8081/api/events/${deleteEventId}`,{
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events/${deleteEventId}`,{
                 method: "DELETE"
             });
             
@@ -48,7 +48,7 @@ function Manage_events(){
     useEffect(()=>{
         const fetchEvents = async ()=>{
             try{
-                const response = await fetch(`http://localhost:8081/api/events/get_events/${userId}`);
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events/get_events/${userId}`);
                 const data = await response.json();
                 setEvents(data);
             }

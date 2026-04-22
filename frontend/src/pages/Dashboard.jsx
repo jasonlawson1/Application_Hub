@@ -62,7 +62,7 @@ function Dashboard() {
   const fetchStats = async () => {
     try {
       const appRes = await fetch(
-        `http://localhost:8081/api/applications/user/${userId}`
+        `${import.meta.env.VITE_API_BASE_URL}/api/applications/user/${userId}`
       );
       const applications = await appRes.json();
 
@@ -80,7 +80,7 @@ function Dashboard() {
 
   const fetchUpcomingInterviews = async () => {
     try {
-      const res = await fetch(`http://localhost:8081/api/interviews/upcoming`);
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/interviews/upcoming`);
       const data = await res.json();
       setUpcomingInterviews(data);
     } catch (error) {
