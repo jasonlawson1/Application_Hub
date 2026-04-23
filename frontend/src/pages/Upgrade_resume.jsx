@@ -2,6 +2,7 @@ import "../styles/Upgrade_resume.css";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import API_BASE from "../config";
 
 function Upgrade_resume() {
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ function Upgrade_resume() {
             formData.append("file", file);
             formData.append("userId", userId);
 
-            const response = await fetch("http://localhost:8081/api/upgrade_resume/upload", {
+            const response = await fetch(`${API_BASE}/api/upgrade_resume/upload`, {
                 method: "POST",
                 body: formData,
             });

@@ -27,7 +27,7 @@ public class Upgrade_resume_service {
     private final Upgrade_resume_repository upgrade_resume_repository;
     private final User_repository user_repository;
     private final S3Client s3Client;
-    private final String resume_bucket = "uploaded-resume-s3";
+    private final String resume_bucket = "upload-resume-s3";
     private final S3Presigner s3Presigner;
 
     public Upgrade_resume_service(Upgrade_resume_repository upgrade_resume_repository, S3Client s3Client,
@@ -74,7 +74,7 @@ public class Upgrade_resume_service {
         try {
             User user = user_repository.findById(userId)
                     .orElseThrow(() -> new RuntimeException("User not found"));
-            String fileUrl = "https://" + resume_bucket + ".s3.amazonaws.com/" + fileName;
+            String fileUrl = "https://" + resume_bucket + ".s3.us-east-2.amazonaws.com/" + fileName;
             String fileType = file.getContentType();
             double fileSize = Math.round((file.getSize() / 1024.0) * 100.0) / 100.0;
             Upgrade_resume resume = new Upgrade_resume(user, fileUrl, uploadedAt, fileName, fileType, fileSize);
