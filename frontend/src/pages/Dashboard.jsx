@@ -6,6 +6,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
 
+/*Renders the main dashboard with a calendar, application stats, and upcoming events. */
 function Dashboard() {
   const first_name = localStorage.getItem("first_name");
   const userId = Number(localStorage.getItem("userId"));
@@ -13,8 +14,8 @@ function Dashboard() {
   const [currentMonth, setCurrentMonth] = useState(new Date().toISOString().slice(0, 7));
   const navigate = useNavigate();
 
- 
-//checks all the days of the month and selcts the days that have events
+
+  /*Returns CSS class names for calendar day cells that have events scheduled. */
   const dayCellClassNames = (arg)=>{
     const date = arg.date.toISOString().split("T")[0];
     const hasEventOnDay = events.some(event =>
@@ -24,7 +25,7 @@ function Dashboard() {
     return hasEventOnDay ? ["has_event"] : [];
   };
 
-  //Checks if events are in an array
+  /*Loads events from localStorage for the current user on mount. */
   useEffect(()=>{
    const storedEvents = localStorage.getItem("events");
    const parsedEvents = storedEvents ? JSON.parse(storedEvents) : [];
@@ -32,10 +33,10 @@ function Dashboard() {
 
     setEvents(userEvents);
    // localStorage.removeItem("events");
-    
+
   }, [userId]);
 
-   //shows only the events of the current month for a specific user
+  //shows only the events of the current month for a specific user
   const eventsThisMonth = events.filter(event=> event.date?.startsWith(currentMonth));
 
   // maps the events to the format required by full calendar
@@ -54,11 +55,13 @@ function Dashboard() {
   const [loadingStats, setLoadingStats] = useState(true);
   const [loadingInterviews, setLoadingInterviews] = useState(true);
 
+  /*Fetches application stats and upcoming interviews on mount. */
   useEffect(() => {
     fetchStats();
     fetchUpcomingInterviews();
   }, []);
 
+  /*Fetches all applications for the user and computes dashboard statistics. */
   const fetchStats = async () => {
     try {
       const appRes = await fetch(
@@ -78,6 +81,7 @@ function Dashboard() {
     }
   };
 
+  /*Fetches the list of upcoming interviews from the backend. */
   const fetchUpcomingInterviews = async () => {
     try {
       const res = await fetch(`http://localhost:8081/api/interviews/upcoming`);
@@ -90,11 +94,13 @@ function Dashboard() {
     }
   };
 
+  /*Navigates to the Add Event page for the clicked calendar date. */
   const handleDateClick = (info) => {
     const date = info.dateStr;
     navigate(`/Add_event/${date}`);
   };
 
+  /*Formats an ISO date string into a readable month/day/year string. */
   const formatDate = (dateStr) => {
     if (!dateStr) return "";
     const date = new Date(dateStr);
@@ -126,7 +132,7 @@ function Dashboard() {
         >
           Upgrade your resume with AI.
         </button>
-       
+
       </div>
 
       <Link to="/Manage_applications" className="app_card_link">
@@ -178,7 +184,7 @@ function Dashboard() {
         <span>Resume Work shop March 29</span>
         <span>Microsoft Interview- March 30</span>
         <span>Lunch with Fiona April 1</span>
-       
+
         {/* {loadingInterviews ? (
           <p>Loading...</p>
         ) : upcomingInterviews.length === 0 ? (
@@ -198,8 +204,8 @@ function Dashboard() {
           ))
         )}*/}
       </div>
-      
-   
+
+
 
 
       </div>

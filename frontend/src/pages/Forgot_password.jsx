@@ -22,7 +22,7 @@ function Forgot_password(){
     const handleSendEmail = async (e) => {
             e.preventDefault();
                 try{
-                    const response = await fetch("http://localhost:8081/api/forgot_password/send_email", {
+                    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/forgot_password/send_email`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ function Forgot_password(){
                     email: emailForm.email,
                     code: codeForm.code
                 };
-                const response = await fetch("http://localhost:8081/api/forgot_password/verify_code", {
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/forgot_password/verify_code`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -99,7 +99,7 @@ function Forgot_password(){
             }
             setErrorMessage("");
 
-            const response = await fetch("http://localhost:8081/api/forgot_password/change_password",{
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/forgot_password/change_password`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

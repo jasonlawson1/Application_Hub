@@ -38,7 +38,7 @@ function Add_event(){
         const editEvent = async ()=>{
             try{
                 if(!id)return;
-                const response = await fetch(`http://localhost:8081/api/events/${id}`);
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events/${id}`);
                 const data = await response.json();
                 setFormData({
                     ...data,
@@ -66,7 +66,7 @@ function Add_event(){
             return;
         }
         try {
-            const url = id? `http://localhost:8081/api/events/${id}` : `http://localhost:8081/api/events/create_event`;
+            const url = id? `${import.meta.env.VITE_API_BASE_URL}/api/events/${id}` : `${import.meta.env.VITE_API_BASE_URL}/api/events/create_event`;
             const method = id? "PUT" : "POST";
             const response = await fetch(url,{
                 method: method,

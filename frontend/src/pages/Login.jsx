@@ -20,7 +20,7 @@ function Login(){
             }
             //send login info to backend
         try {
-        const response = await fetch("http://localhost:8081/api/login", {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

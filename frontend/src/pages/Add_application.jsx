@@ -14,7 +14,7 @@ useEffect(()=>{
     const editApplication = async ()=> {
         try{
             if(!id) return;
-            const response = await fetch(`http://localhost:8081/api/applications/${id}`);
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/applications/${id}`);
             const data = await response.json();
             setFormData(data);
         }
@@ -47,7 +47,7 @@ const handleChange = (e)=>{
 const handleSubmit = async (e)=>{
     e.preventDefault();
     const method = id? "PUT" : "POST";
-    const url = id? `http://localhost:8081/api/applications/${id}` :`http://localhost:8081/api/applications`;
+    const url = id? `${import.meta.env.VITE_API_BASE_URL}/api/applications/${id}` : `${import.meta.env.VITE_API_BASE_URL}/api/applications`;
     try{
         const response = await fetch(url,{
             method: method,

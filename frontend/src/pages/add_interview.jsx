@@ -24,7 +24,7 @@ function Add_interview() {
     const fetchApplications = async () => {
       try {
         const res = await fetch(
-          `http://localhost:8081/api/applications/user/${userId}`
+          `${import.meta.env.VITE_API_BASE_URL}/api/applications/user/${userId}`
         );
         const data = await res.json();
         setApplications(data);
@@ -49,7 +49,7 @@ function Add_interview() {
 
     try {
       const response = await fetch(
-        `http://localhost:8081/api/applications/${applicationId}/interviews`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/applications/${applicationId}/interviews`,
         {
           method: "POST",
           headers: {

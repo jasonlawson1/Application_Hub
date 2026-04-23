@@ -22,7 +22,7 @@ function Manage_applications(){
     useEffect(()=>{
         const fetchApplications = async ()=>{
             try{
-                const response = await fetch(`http://localhost:8081/api/applications/user/${userId}`);
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/applications/user/${userId}`);
                 const data = await response.json();
                 
 
@@ -45,7 +45,7 @@ function Manage_applications(){
 
     const handleDelete = async ()=>{
         try {
-            const response =await fetch(`http://localhost:8081/api/applications/${deletedAppId}`, {
+            const response =await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/applications/${deletedAppId}`, {
             method: "DELETE"
         });
 

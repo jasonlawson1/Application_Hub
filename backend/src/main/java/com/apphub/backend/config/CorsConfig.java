@@ -11,16 +11,13 @@ public class CorsConfig {
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
-
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-
                 registry.addMapping("/**")
                         .allowedOriginPatterns("*")
                         .allowedOrigins(
-                        "http://localhost:5173",
-                        "http://localhost:5174"
-                        )
+                                "http://localhost:5173",
+                                "http://application-hub-front.s3-website.us-east-2.amazonaws.com")
                         .allowedMethods("*")
                         .allowedHeaders("*")
                         .allowCredentials(true);
