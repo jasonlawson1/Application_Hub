@@ -1,8 +1,10 @@
+import API_BASE from "../config";
 import "../styles/Manage_events.css";
 
 import { useState, useEffect } from "react";
 import { useNavigate,Link } from "react-router-dom";
 
+/*Renders the list of the user's events as cards with options to edit or delete each one. */
 function Manage_events(){
 
     const [events, setEvents] = useState([]);
@@ -11,6 +13,8 @@ function Manage_events(){
     const[openMenuId, setOpenMenuId] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [deleteEventId, setDeleteEventId] = useState(null);
+
+    /*Formats a time string into a 12-hour AM/PM format. */
     const formatTime = (time) =>{
         return new Date(`1970-01-01T${time}`).toLocaleTimeString("en-US", {
         hour: "numeric",
@@ -19,36 +23,39 @@ function Manage_events(){
         });
     };
 
+    /*Sends a DELETE request for the selected event and removes it from the local list. */
     const handleDelete = async () =>{
         try{
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events/${deleteEventId}`,{
+            const response = await fetch(`${API_BASE}/api/events/${deleteEventId}`,{
                 method: "DELETE"
             });
-            
+
             if(response.ok){
                 setShowDeleteModal(false);
                 setEvents(prev=>prev.filter((event)=>event.id!==deleteEventId));
                 return;
             }
-           
+
 
         }catch(error){
             console.error("Error deleting event:", error);
         }
     }
 
+    /*Formats a date string into a human-readable long date. */
     const formatDate = (date) =>{
         return new Date(date).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
         day: "numeric"});
     };
- 
 
+
+    /*Fetches all events for the current user from the backend on mount. */
     useEffect(()=>{
         const fetchEvents = async ()=>{
             try{
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events/get_events/${userId}`);
+                const response = await fetch(`${API_BASE}/api/events/get_events/${userId}`);
                 const data = await response.json();
                 setEvents(data);
             }
@@ -62,12 +69,11 @@ function Manage_events(){
 
 
 
-
     return(
         <div className="background">
             <div className="page_content">
             <h1>Manage Events</h1>
-           
+
                 <div className="event_card_container">
                     {events.map((event) =>(
                                 <div className="event_card" key={event.id}>
@@ -84,7 +90,7 @@ function Manage_events(){
                                             <span className="notes">{event.notes}</span>
                                         </div>
                                         )}
-                                        
+
 
                                         <div className="event_actions_container">
                                                 <button type="button" className="kebab_button" onClick={()=> setOpenMenuId(openMenuId === event.id ? null : event.id)}>
@@ -98,12 +104,12 @@ function Manage_events(){
                                                 )}
                                         </div>
                                     </div>
-                                    
-                                    
+
+
                                 </div>
                     ))}
                 </div>
-                
+
                 {showDeleteModal &&(
                     <div className="delete_modal">
                         <div className="delete_modal_content">
@@ -115,12 +121,13 @@ function Manage_events(){
                         </div>
                     </div>
                 )}
-                
 
-            
+
+
            </div>
-        
+
         </div>
     );
 }
 export default Manage_events;
+

@@ -1,7 +1,9 @@
+import API_BASE from "../config";
 import { useState } from "react";
 import { useNavigate,Link } from "react-router-dom";
 import "../styles/Login.css";
 
+/*Renders the login form and handles user authentication. */
 function Login(){
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
@@ -10,9 +12,10 @@ function Login(){
         password:""
     });
 
+    /*Submits the login form to the backend and navigates to dashboard on success. */
     const handleSubmit = async (e) =>{
         e.preventDefault();
-          
+
         if(!formData.email||!formData.password)
             {
             setErrorMessage("Please fill in all fields.");
@@ -20,7 +23,7 @@ function Login(){
             }
             //send login info to backend
         try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/login`, {
+        const response = await fetch(`${API_BASE}/api/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -33,7 +36,7 @@ function Login(){
                 //storing first name &user id
                 const first_name=data.first_name;
                 const userId=data.userId;
-                
+
                 localStorage.setItem("first_name",first_name);
                 localStorage.setItem("userId", userId);
                console.log("Stored userId:", localStorage.getItem("userId"));
@@ -49,6 +52,7 @@ function Login(){
         }
     }
 
+    /*Updates the form state when the user types in an input field. */
     const handleChange = (e)=>{
         setFormData({
             ...formData,
@@ -56,14 +60,10 @@ function Login(){
         });
     }
 
-  
-
-
-
 
 return(
     <div className="login_background">
-        
+
         <div className="login_module">
                 <h1>Login</h1>
                  <button
@@ -96,28 +96,22 @@ return(
                     onChange={handleChange}
                     />
                     <button type="submit" className="login_btn">Submit</button>
-                
+
                 </form>
 
                 <Link to="/Forgot_password" className="forgot_password_link">
                     <span>Forgot Password?</span>
                 </Link>
-                
+
         </div>
 
-      
+
 
     </div>
-   
+
 
 
 );
-
-
-
-
-
-
-
 }
 export default Login;
+

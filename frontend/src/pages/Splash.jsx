@@ -3,10 +3,12 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
 
+/*Renders the animated splash screen and redirects to signup after a short delay. */
 function Splash() {
 
     const navigate = useNavigate();
 
+    /*Runs GSAP ball animations and sets a timer to navigate to the signup page. */
     useEffect(() => {
     // Animate X
     gsap.to(".ball", {
@@ -26,15 +28,15 @@ function Splash() {
     });
 
     const timer = setTimeout(() => {
-      navigate("/signup"); 
+      navigate("/signup");
     }, 3500);
 
     return () => clearTimeout(timer);
   }, [navigate]);
 
 
-    
-  
+
+
   return (
     <div className="splash-page">
 

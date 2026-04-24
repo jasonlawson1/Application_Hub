@@ -1,7 +1,9 @@
+import API_BASE from "../config";
 import { useState } from "react";
 import { useNavigate,Link } from "react-router-dom";
 import "../styles/Forgot_password.css";
 
+/*Renders the multi-step forgot password flow for email verification, code entry, and password reset. */
 function Forgot_password(){
     const navigate = useNavigate();
     const [instructions, setInstructions]=useState("Enter your email and you will receive a code to reset your password.");
@@ -19,17 +21,18 @@ function Forgot_password(){
         confirmNewPassword:""
     });
 
+    /*Sends the user's email to the backend to initiate the password reset flow. */
     const handleSendEmail = async (e) => {
             e.preventDefault();
                 try{
-                    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/forgot_password/send_email`, {
+                    const response = await fetch(`${API_BASE}/api/forgot_password/send_email`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                 },
                 body: JSON.stringify(emailForm),
                 });
-                
+
                 if(response.ok){
                     setSteps(2);
                     setInstructions("Type in the code you received in your email to reset your password.");
@@ -38,13 +41,14 @@ function Forgot_password(){
                 else{
                     setErrorMessage("Something went wrong or your account does not exists.")
                 }
-                    
+
                 }
                 catch(error){
                     console.log(error);
                 }
     }
-        
+
+    /*Submits the verification code to the backend and advances to the password reset step. */
     const handleSendCode = async(e) => {
         e.preventDefault();
 
@@ -53,7 +57,7 @@ function Forgot_password(){
                     email: emailForm.email,
                     code: codeForm.code
                 };
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/forgot_password/verify_code`, {
+                const response = await fetch(`${API_BASE}/api/forgot_password/verify_code`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -76,8 +80,9 @@ function Forgot_password(){
         catch(error){
             console.log(error);
         }
-    }   
-    
+    }
+
+    /*Validates and submits the new password to the backend to complete the reset. */
     const handleSendNewPassword = async(e) =>{
         e.preventDefault();
         //if new password meets all requirements redirect to success page
@@ -99,7 +104,7 @@ function Forgot_password(){
             }
             setErrorMessage("");
 
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/forgot_password/change_password`,{
+            const response = await fetch(`${API_BASE}/api/forgot_password/change_password`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -118,9 +123,9 @@ function Forgot_password(){
             else{
                 setErrorMessage(data.message);
             }
-            
+
         } catch (error) {
-            
+
         }
 
 
@@ -129,6 +134,7 @@ function Forgot_password(){
 
 
 
+    /*Updates the email form state when the user types in the email input. */
     const handleEmail = (e) =>{
         setEmailForm({
             ...emailForm,
@@ -136,6 +142,7 @@ function Forgot_password(){
         });
     }
 
+    /*Updates the code form state when the user types in the code input. */
     const handleCode = (e) =>{
         setCodeForm({
             ...codeForm,
@@ -143,6 +150,7 @@ function Forgot_password(){
         });
     }
 
+    /*Updates the new password form state when the user types in either password field. */
     const handleNewPassword = (e)=>{
         setNewPasswordForm({
             ...newPasswordForm,
@@ -178,14 +186,14 @@ function Forgot_password(){
                         value={emailForm.email}
                     />
                 </>
-                
+
                 <button type="submit" className="submit_btn" >Submit</button>
                 </form>
-             )}   
+             )}
 
            {steps === 2 &&(
               <form id="codeForm" onSubmit={handleSendCode}>
-                
+
                 <>
                 <label htmlFor="code">Code</label>
                     <input
@@ -197,7 +205,7 @@ function Forgot_password(){
                         onChange={handleCode}
                         value={codeForm.code}
                     />
-                </>      
+                </>
               <button type="submit" className="submit_btn" >Submit</button>
               </form>
             )}
@@ -229,7 +237,7 @@ function Forgot_password(){
 
                     </>
                     <button type="submit" className="submit_btn" >Submit</button>
-                </form>   
+                </form>
               )}
 
               {steps === 4 &&(
@@ -239,13 +247,11 @@ function Forgot_password(){
                         <span>Return to login page here.</span>
                     </Link>
                 </>
-               
+
               )}
-              
-            
-               
-                 
-            
+
+
+
 
         </div>
     </div>
@@ -253,3 +259,4 @@ function Forgot_password(){
 
 }
 export default Forgot_password;
+

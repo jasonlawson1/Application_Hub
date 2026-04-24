@@ -1,8 +1,10 @@
+import API_BASE from "../config";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../styles/Add_event.css";
 
+/*Renders the form to create a new event or edit an existing one for the selected date. */
 function Add_event(){
    const { id, date } = useParams();
    const navigate = useNavigate();
@@ -15,13 +17,15 @@ function Add_event(){
     location:"",
     notes: "",
     date:""
-   
+
    });
 
+   /*Updates the form state when the user types in an input field. */
    const handleChange = (e) =>{
       setFormData({...formData, [e.target.name]: e.target.value});
    };
 
+   /*Formats a YYYY-MM-DD date string into a human-readable long date. */
     const formatDate = (date) =>{
         const [year, month, day] = date.split("-");
 
@@ -33,18 +37,19 @@ function Add_event(){
    };
 
     const displayDate = formData.date || date;
-   
+
+   /*Fetches the existing event data when editing, pre-populating the form. */
     useEffect(()=> {
         const editEvent = async ()=>{
             try{
                 if(!id)return;
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events/${id}`);
+                const response = await fetch(`${API_BASE}/api/events/${id}`);
                 const data = await response.json();
                 setFormData({
                     ...data,
                     date: data.date
                 });
-                
+
             }
             catch(error){
                 console.error("error fetching event:", error);
@@ -52,13 +57,11 @@ function Add_event(){
         };
         editEvent();
     }, [id]);
-    
-  
 
-   
-   
-   
 
+
+
+   /*Validates and submits the event form, saving to the backend and updating localStorage. */
    const handleSubmit = async(e)=>{
         e.preventDefault();
         if(!formData.title ||!formData.startTime){
@@ -66,7 +69,7 @@ function Add_event(){
             return;
         }
         try {
-            const url = id? `${import.meta.env.VITE_API_BASE_URL}/api/events/${id}` : `${import.meta.env.VITE_API_BASE_URL}/api/events/create_event`;
+            const url = id? `${API_BASE}/api/events/${id}` : `${API_BASE}/api/events/create_event`;
             const method = id? "PUT" : "POST";
             const response = await fetch(url,{
                 method: method,
@@ -80,7 +83,7 @@ function Add_event(){
                 })
             });
 
-        
+
 
             if(response.ok){
                                 //make a list of all events
@@ -98,9 +101,9 @@ function Add_event(){
                 const updatedEvents = [...allEvents, newEvent];
                  // turns list into string
                 localStorage.setItem("events", JSON.stringify(updatedEvents));
-                } 
-               
-                
+                }
+
+
                 const hasSeenEventSuccessPage = (localStorage.getItem("seenEventSuccessPage"));
                 if(!hasSeenEventSuccessPage){
                     localStorage.setItem("seenEventSuccessPage", "true");
@@ -110,27 +113,27 @@ function Add_event(){
                 else{
                     navigate("/Manage_events");
                 }
-                
+
             }
 
 
         } catch (error) {
             console.log(error);
         }
-      
+
 
    }
-   
+
 
     return(
-        
+
         <div className="background">
             <div className="page_content">
             <h1>Add Event</h1>
             <div className="modal">
                     <p className="date_title">{displayDate ? formatDate(displayDate) : ""}</p>
                     {errorMessage &&<p className="error_message">{errorMessage}</p>}
-                    
+
                     <form id="event_form" className="event_form" onSubmit={handleSubmit}>
                         <label htmlFor ="title">Title</label>
                         <input
@@ -177,9 +180,9 @@ function Add_event(){
                             <button type="submit" className="save_cancel_buttons">Save event</button>
                         </div>
                     </form>
-                   
 
-             
+
+
                 </div>
             </div>
         </div>
@@ -187,3 +190,4 @@ function Add_event(){
     );
 }
 export default Add_event;
+

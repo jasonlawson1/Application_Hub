@@ -1,7 +1,9 @@
+import API_BASE from "../config";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Add_application.css";
 
+/*Renders the form to schedule a new interview linked to an existing job application. */
 function Add_interview() {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
@@ -20,11 +22,12 @@ function Add_interview() {
     notes: "",
   });
 
+  /*Fetches the user's applications to populate the linked application dropdown on mount. */
   useEffect(() => {
     const fetchApplications = async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_BASE_URL}/api/applications/user/${userId}`
+          `${API_BASE}/api/applications/user/${userId}`
         );
         const data = await res.json();
         setApplications(data);
@@ -35,6 +38,7 @@ function Add_interview() {
     fetchApplications();
   }, []);
 
+  /*Updates the form state when the user changes any input or select field. */
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -42,6 +46,7 @@ function Add_interview() {
     });
   };
 
+  /*Submits the interview form to the backend and navigates to the success page on completion. */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -49,7 +54,7 @@ function Add_interview() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/applications/${applicationId}/interviews`,
+        `${API_BASE}/api/applications/${applicationId}/interviews`,
         {
           method: "POST",
           headers: {
@@ -228,3 +233,4 @@ function Add_interview() {
 }
 
 export default Add_interview;
+

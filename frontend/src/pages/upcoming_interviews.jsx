@@ -1,20 +1,24 @@
+import API_BASE from "../config";
 import "../styles/Manage_applications.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+/*Renders a list of all interviews with inline editing and delete functionality. */
 function Upcoming_interviews() {
   const navigate = useNavigate();
   const [interviews, setInterviews] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [editFormData, setEditFormData] = useState({});
 
+  /*Fetches all interviews from the backend on mount. */
   useEffect(() => {
     fetchInterviews();
   }, []);
 
+  /*Retrieves all interviews from the backend and updates the interviews state. */
   const fetchInterviews = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/interviews`);
+      const response = await fetch(`${API_BASE}/api/interviews`);
       const data = await response.json();
       setInterviews(data);
     } catch (error) {
@@ -22,10 +26,11 @@ function Upcoming_interviews() {
     }
   };
 
+  /*Prompts for confirmation and deletes the specified interview from the backend and local list. */
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this interview?")) return;
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/interviews/${id}`, {
+      const response = await fetch(`${API_BASE}/api/interviews/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -36,6 +41,7 @@ function Upcoming_interviews() {
     }
   };
 
+  /*Populates the inline edit form with the selected interview's current data. */
   const handleEditClick = (interview) => {
     setEditingId(interview.id);
     setEditFormData({
@@ -50,13 +56,15 @@ function Upcoming_interviews() {
     });
   };
 
+  /*Updates the inline edit form state when the user changes a field. */
   const handleEditChange = (e) => {
     setEditFormData({ ...editFormData, [e.target.name]: e.target.value });
   };
 
+  /*Saves the edited interview data to the backend and refreshes the list. */
   const handleEditSave = async (id) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/interviews/${id}`, {
+      const response = await fetch(`${API_BASE}/api/interviews/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editFormData),
@@ -100,7 +108,7 @@ function Upcoming_interviews() {
             ) : (
               interviews.map((interview) =>
                 editingId === interview.id ? (
-                
+
                   <tr key={interview.id}>
                     <td>
                       <input
@@ -204,7 +212,7 @@ function Upcoming_interviews() {
                     </td>
                   </tr>
                 ) : (
-                 
+
                   <tr key={interview.id}>
                     <td>{interview.company}</td>
                     <td>{interview.jobTitle}</td>
@@ -240,3 +248,4 @@ function Upcoming_interviews() {
 }
 
 export default Upcoming_interviews;
+

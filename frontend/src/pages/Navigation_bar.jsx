@@ -1,6 +1,8 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import "../styles/Navigation_bar.css";
+
+/*Renders the persistent navigation bar with a home button and renders nested route content via Outlet. */
 function Navigation_bar(){
     const navigate = useNavigate();
 
@@ -12,8 +14,8 @@ function Navigation_bar(){
                 <div className="blob blob4" />
                 <div className="blob blob5" />
                 <div className="blob blob6" />
-           
-            
+
+
             <button type="button" className="home_button" onClick={()=> navigate("/dashboard")}>
                 <FaHome size={30} />
             </button>
@@ -22,6 +24,6 @@ function Navigation_bar(){
                 <Outlet />
             </div>
         </div>
-    ); 
+    );
 }
 export default  Navigation_bar;

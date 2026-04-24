@@ -24,6 +24,7 @@ public class Login_controller {
     }
 
 
+    /* Handles POST request to authenticate a user with email and password. */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, Object> user_data){
     

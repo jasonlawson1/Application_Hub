@@ -1,8 +1,10 @@
+import API_BASE from "../config";
 import { useState, useEffect } from "react";
 import { useNavigate} from "react-router-dom";
 import "../styles/Add_application.css";
 import { useParams } from "react-router-dom";
 
+/*Renders the form to create a new job application or edit an existing one. */
 function Add_application(){
 
 const navigate=useNavigate();
@@ -10,11 +12,12 @@ const userId = Number(localStorage.getItem("userId"));
 localStorage.setItem("formType", "application");
 const { id } = useParams();
 
+/*Fetches the existing application data when editing, pre-populating the form. */
 useEffect(()=>{
     const editApplication = async ()=> {
         try{
             if(!id) return;
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/applications/${id}`);
+            const response = await fetch(`${API_BASE}/api/applications/${id}`);
             const data = await response.json();
             setFormData(data);
         }
@@ -37,6 +40,7 @@ const [formData, setFormData] = useState({
 });
 
 
+/*Updates the form state when the user types in an input field. */
 const handleChange = (e)=>{
     setFormData({
         ...formData,
@@ -44,10 +48,11 @@ const handleChange = (e)=>{
     });
 };
 
+/*Submits the application form, creating or updating the record based on whether an id is present. */
 const handleSubmit = async (e)=>{
     e.preventDefault();
     const method = id? "PUT" : "POST";
-    const url = id? `${import.meta.env.VITE_API_BASE_URL}/api/applications/${id}` : `${import.meta.env.VITE_API_BASE_URL}/api/applications`;
+    const url = id? `${API_BASE}/api/applications/${id}` :`${API_BASE}/api/applications`;
     try{
         const response = await fetch(url,{
             method: method,
@@ -82,25 +87,13 @@ const handleSubmit = async (e)=>{
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 return(
     <div className="background">
         <div className="page_content">
         <h1>Create New Application</h1>
         <div className="job_info_section">
             <p className="section_header">Job information</p>
-            
+
             <form id="application_form" onSubmit={handleSubmit}>
                     <div className="application_boxes">
                         <label htmlFor="company_name">Company name</label>
@@ -127,7 +120,7 @@ return(
                             onChange={handleChange}
                         />
                     </div>
-                    
+
                     <div className="application_boxes">
                         <label htmlFor="location">Location (City, State)</label>
                             <input
@@ -199,25 +192,17 @@ return(
                     </div>
 
             </form>
-            
+
 
         </div>
-
-
-
-
-
-
-
-
-
 
 
         </div>
     </div>
 
-    
+
 )
 
 }
 export default Add_application;
+

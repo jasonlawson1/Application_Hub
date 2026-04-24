@@ -23,9 +23,10 @@ public class Application_controller {
 
     public Application_controller(Application_service application_service) {
         this.application_service = application_service;
-        
+
     }
 
+    /* Handles POST request to create a new job application. */
     @PostMapping
     public ResponseEntity<?> create_application(@RequestBody Application_Request request) {
         if (application_service.create_application(request)) {
@@ -37,12 +38,13 @@ public class Application_controller {
         }
     }
 
+    /* Handles GET request to retrieve all job applications. */
     @GetMapping
     public ResponseEntity<List<Application>> get_all_applications() {
         return ResponseEntity.ok(application_service.get_all_applications());
     }
 
-    // Returns all applications belonging to a specific user
+    /* Handles GET request to retrieve all applications belonging to a specific user. */
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> get_applications_by_userId(@PathVariable Long userId) {
         try{
@@ -61,7 +63,7 @@ public class Application_controller {
         
     }
     
-    // Returns one application so user can edit it
+    /* Handles GET request to retrieve a single application by its ID. */
     @GetMapping("/{id}")
     public ResponseEntity<?> get_application_by_id(@PathVariable Long id) {
     Application application = application_service.get_application_by_id(id);
@@ -75,6 +77,7 @@ public class Application_controller {
             .body(Map.of("message", "Application not found"));
     }
 
+    /* Handles PUT request to update an existing application by its ID. */
     @PutMapping("/{id}")
     public ResponseEntity<?> update_application(@PathVariable Long id, @RequestBody Application updated_application) {
         Application application = application_service.update_application(id, updated_application);
@@ -88,6 +91,7 @@ public class Application_controller {
                 .body(Map.of("message", "Application not found"));
     }
 
+    /* Handles DELETE request to remove an application by its ID. */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete_application(@PathVariable Long id) {
         boolean deleted = application_service.delete_application(id);
