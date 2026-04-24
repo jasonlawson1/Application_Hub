@@ -17,6 +17,7 @@ public class Forgot_password_controller {
         this.forgot_password_service=forgot_password_service;
     }
 
+    /* Handles POST request to send a password reset verification code to the user's email. */
     @PostMapping("/send_email")
     public ResponseEntity<?> send_email(@RequestBody Map<String, Object> user_email){
        String email = (String)user_email.get("email");
@@ -29,6 +30,7 @@ public class Forgot_password_controller {
     
     }
 
+    /* Handles POST request to verify the password reset code submitted by the user. */
     @PostMapping("/verify_code")
     public ResponseEntity<?> verify_code(@RequestBody Map<String, Object> data){
         String code = (String) data.get("code");
@@ -44,6 +46,7 @@ public class Forgot_password_controller {
          
     }
 
+    /* Handles POST request to update a user's password after successful code verification. */
     @PostMapping("/change_password")
     public ResponseEntity<?> change_password(@RequestBody Map<String, Object> data){
         try {

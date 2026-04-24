@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/Succesfully_submitted.css";
 
 
+/*Renders a success confirmation page after a form has been submitted, with a link back to the dashboard. */
 function Succesfully_submitted(){
     const navigate = useNavigate();
     const formType = localStorage.getItem("formType");
@@ -12,7 +13,7 @@ function Succesfully_submitted(){
             <h1>Yay! You succesfully created an {formType}!🎊</h1>
             <button type="button" className="dashboard_button" onClick={()=>navigate("/Dashboard")}>Return to Dashboard</button>
         </div>
-        
+
     )
 
 }

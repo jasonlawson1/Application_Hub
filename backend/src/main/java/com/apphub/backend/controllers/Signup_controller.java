@@ -25,6 +25,7 @@ public class Signup_controller {
     }
 
     
+    /* Handles POST request to register a new user account after validating email and password match. */
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody Map<String, Object> user_data) {
     

@@ -22,6 +22,7 @@ public class Events_controller {
         this.events_service = events_service;
     }
 
+    /* Handles POST request to create a new calendar event. */
     @PostMapping("/create_event")
     public ResponseEntity<?> create_event (@RequestBody Events_request request){
         if(events_service.create_event(request)){
@@ -32,6 +33,7 @@ public class Events_controller {
                 .body(Map.of("message", "Event was not created"));
     }
 
+    /* Handles GET request to retrieve all events belonging to a specific user. */
     @GetMapping("/get_events/{userId}")
     public ResponseEntity<?> get_events(@PathVariable Long userId){
        List <Event> events = events_service.get_events_by_user_id(userId);
@@ -50,6 +52,7 @@ public class Events_controller {
       
     
 
+    /* Handles GET request to retrieve a single event by its ID. */
     @GetMapping("/{id}")
     public ResponseEntity<?> get_event_by_id(@PathVariable Long id){
         Events_request event_request = events_service.get_event_by_id(id);
@@ -61,6 +64,7 @@ public class Events_controller {
                 .body(Map.of("message", "Event not found with id: " + id));
     }
 
+    /* Handles PUT request to update an existing event by its ID. */
     @PutMapping("/{id}")
     public ResponseEntity<?> update_event(@PathVariable Long id, @RequestBody Events_request request){
        if(events_service.update_event(id, request)) {
@@ -73,6 +77,7 @@ public class Events_controller {
     }
 
 
+    /* Handles DELETE request to remove an event by its ID. */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete_event (@PathVariable Long id){
         if(events_service.delete_event(id)){

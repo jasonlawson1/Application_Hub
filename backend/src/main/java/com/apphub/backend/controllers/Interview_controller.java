@@ -20,6 +20,7 @@ public class Interview_controller {
         this.interview_service = interview_service;
     }
 
+    /* Handles POST request to create a new interview linked to a specific application. */
     @PostMapping("/applications/{applicationId}/interviews")
     public ResponseEntity<?> create_interview_for_application(@PathVariable Long applicationId,
                                                               @RequestBody Interview interview) {
@@ -34,16 +35,19 @@ public class Interview_controller {
                 .body(Map.of("message", "Application not found"));
     }
 
+    /* Handles GET request to retrieve all interviews for a specific application. */
     @GetMapping("/applications/{applicationId}/interviews")
     public ResponseEntity<List<Interview>> get_interviews_by_application(@PathVariable Long applicationId) {
         return ResponseEntity.ok(interview_service.get_interviews_by_application_id(applicationId));
     }
 
+    /* Handles GET request to retrieve all interviews across all applications. */
     @GetMapping("/interviews")
     public ResponseEntity<List<Interview>> get_all_interviews() {
         return ResponseEntity.ok(interview_service.get_all_interviews());
     }
 
+    /* Handles GET request to retrieve a single interview by its ID. */
     @GetMapping("/interviews/{id}")
     public ResponseEntity<?> get_interview_by_id(@PathVariable Long id) {
         Interview interview = interview_service.get_interview_by_id(id);
@@ -57,6 +61,7 @@ public class Interview_controller {
                 .body(Map.of("message", "Interview not found"));
     }
 
+    /* Handles PUT request to update an existing interview by its ID. */
     @PutMapping("/interviews/{id}")
     public ResponseEntity<?> update_interview(@PathVariable Long id, @RequestBody Interview updatedInterview) {
         Interview interview = interview_service.update_interview(id, updatedInterview);
@@ -70,6 +75,7 @@ public class Interview_controller {
                 .body(Map.of("message", "Interview not found"));
     }
 
+    /* Handles DELETE request to remove an interview by its ID. */
     @DeleteMapping("/interviews/{id}")
     public ResponseEntity<?> delete_interview(@PathVariable Long id) {
         boolean deleted = interview_service.delete_interview(id);
@@ -83,6 +89,7 @@ public class Interview_controller {
                 .body(Map.of("message", "Interview not found"));
     }
 
+    /** Handles GET request to retrieve all upcoming interviews ordered by date. */
     @GetMapping("/interviews/upcoming")
     public ResponseEntity<List<Interview>> get_upcoming_interviews() {
         return ResponseEntity.ok(interview_service.get_upcoming_interviews());

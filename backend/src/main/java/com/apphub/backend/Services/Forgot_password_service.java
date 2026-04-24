@@ -38,21 +38,20 @@ public class Forgot_password_service {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    
+    /*Constructs the service with the required user and password-reset repositories. */
     public Forgot_password_service(User_repository user_repository, Password_reset_repository password_reset_repository){
         this.user_repository = user_repository;
         this.password_reset_repository = password_reset_repository;
-       
-    
+
     }
 
-    
+    /*Generates a reset code, creates a token, and sends the code to the given email address. */
     public Boolean send_email (String email){
         String code=code_generator();
-       
+
         Forgot_password_token token = create_token(email, code);
         if(token!=null){
-            
+
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(email);
             message.setFrom(fromEmail);
@@ -64,10 +63,10 @@ public class Forgot_password_service {
             }
 
             return false;
-           
+
     }
 
-
+    /*Creates and persists a hashed password-reset token for the user with the given email. */
     public Forgot_password_token create_token(String email, String code){
         User user =  user_repository.findByEmail(email);
         if(user==null){
@@ -80,17 +79,20 @@ public class Forgot_password_service {
         return password_reset_repository.save(token);
     }
 
+    /*Generates a random six-digit numeric reset code as a string. */
     public String code_generator(){
         String code = String.format("%06d", new Random().nextInt(1_000_000));
         return code;
     }
 
+    /*Verifies that the submitted reset code matches the stored hashed token for the given email. */
     public Boolean verify_code(String code, String email){
         Forgot_password_token token = password_reset_repository.getByEmail(email);
         String storedCode = token.getCode();
         return passwordEncoder.matches(code, storedCode);
     }
 
+    /*Updates the user's password if the new password and confirmation match. */
     public Boolean change_password(String newPassword, String confirmNewPassword, String email){
         if(newPassword.equals(confirmNewPassword)){
             User user = user_repository.findByEmail(email);
@@ -100,11 +102,11 @@ public class Forgot_password_service {
 
             return true;
         }
-        
+
         return false;
 
     }
 
-   
+
 
 }

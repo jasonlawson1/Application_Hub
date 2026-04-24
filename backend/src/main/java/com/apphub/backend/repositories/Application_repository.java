@@ -6,5 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.apphub.backend.models.Application;
 
 public interface Application_repository extends JpaRepository<Application, Long> {
+
+    /*Returns all applications belonging to the user with the given ID. */
     List<Application> findByUserId(Long userId);
 }

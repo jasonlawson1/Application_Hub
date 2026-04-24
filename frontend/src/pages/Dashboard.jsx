@@ -4,7 +4,10 @@ import "../styles/Dashboard.css";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import API_BASE from "../config";
 
+// API Gateway URL used ONLY for the dashboard stats serverless function
+const API_GATEWAY = "https://k29je3uh57.execute-api.us-east-2.amazonaws.com";
 
 /*Renders the main dashboard with a calendar, application stats, and upcoming events. */
 function Dashboard() {
@@ -14,14 +17,12 @@ function Dashboard() {
   const [currentMonth, setCurrentMonth] = useState(new Date().toISOString().slice(0, 7));
   const navigate = useNavigate();
 
-
   /*Returns CSS class names for calendar day cells that have events scheduled. */
   const dayCellClassNames = (arg)=>{
     const date = arg.date.toISOString().split("T")[0];
     const hasEventOnDay = events.some(event =>
     event.date?.slice(0, 10) === date
     );
-
     return hasEventOnDay ? ["has_event"] : [];
   };
 
@@ -30,16 +31,13 @@ function Dashboard() {
    const storedEvents = localStorage.getItem("events");
    const parsedEvents = storedEvents ? JSON.parse(storedEvents) : [];
    const userEvents = parsedEvents.filter(e=> e.userId ===userId);
-
     setEvents(userEvents);
-   // localStorage.removeItem("events");
-
   }, [userId]);
 
-  //shows only the events of the current month for a specific user
+  // Shows only the events of the current month for a specific user
   const eventsThisMonth = events.filter(event=> event.date?.startsWith(currentMonth));
 
-  // maps the events to the format required by full calendar
+  // Maps the events to the format required by FullCalendar
   const calendarEvents = events.map( event => ({
     title: event.title,
     start: event.date
@@ -61,18 +59,18 @@ function Dashboard() {
     fetchUpcomingInterviews();
   }, []);
 
-  /*Fetches all applications for the user and computes dashboard statistics. */
+  /*Fetches dashboard stats through API Gateway (serverless function).
+    This is the only endpoint routed through API Gateway — all others use EC2 directly. */
   const fetchStats = async () => {
     try {
-      const appRes = await fetch(
-        `http://localhost:8081/api/applications/user/${userId}`
+      const res = await fetch(
+        `${API_GATEWAY}/api/dashboard/stats?userId=${userId}`
       );
-      const applications = await appRes.json();
-
+      const data = await res.json();
       setStats({
-        applications: applications.length,
-        interviews: applications.filter((app) => app.status === "Interview").length,
-        applied: applications.filter((app) => app.status === "Applied").length,
+        applications: data.totalApplications ?? 0,
+        interviews: data.totalInterviews ?? 0,
+        applied: data.applied ?? 0,
       });
     } catch (error) {
       console.error("Error fetching stats:", error);
@@ -81,10 +79,10 @@ function Dashboard() {
     }
   };
 
-  /*Fetches the list of upcoming interviews from the backend. */
+  /*Fetches the list of upcoming interviews from EC2 backend directly. */
   const fetchUpcomingInterviews = async () => {
     try {
-      const res = await fetch(`http://localhost:8081/api/interviews/upcoming`);
+      const res = await fetch(`${API_BASE}/api/interviews/upcoming`);
       const data = await res.json();
       setUpcomingInterviews(data);
     } catch (error) {
@@ -132,7 +130,6 @@ function Dashboard() {
         >
           Upgrade your resume with AI.
         </button>
-
       </div>
 
       <Link to="/Manage_applications" className="app_card_link">
@@ -184,29 +181,7 @@ function Dashboard() {
         <span>Resume Work shop March 29</span>
         <span>Microsoft Interview- March 30</span>
         <span>Lunch with Fiona April 1</span>
-
-        {/* {loadingInterviews ? (
-          <p>Loading...</p>
-        ) : upcomingInterviews.length === 0 ? (
-          <p className="no_events">No upcoming interviews scheduled.</p>
-        ) : (
-          upcomingInterviews.map((interview) => (
-            <div key={interview.id} className="upcoming_interview_item">
-              <p className="interview_company">
-                {interview.company} — {interview.jobTitle}
-              </p>
-              <p className="interview_details">
-                📅 {formatDate(interview.interviewDate)}{" "}
-                {interview.interviewTime && `at ${interview.interviewTime}`}
-              </p>
-              <p className="interview_type">{interview.interviewType}</p>
-            </div>
-          ))
-        )}*/}
       </div>
-
-
-
 
       </div>
     </div>

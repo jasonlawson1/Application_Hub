@@ -21,6 +21,7 @@ public class Dashboard_controller {
         this.interview_service = interview_service;
     }
 
+    /* Handles GET request to retrieve dashboard statistics */
     @GetMapping("/api/dashboard/stats")
     public ResponseEntity<Map<String, Long>> get_dashboard_stats() {
         long totalApplications = application_service.get_all_applications().size();

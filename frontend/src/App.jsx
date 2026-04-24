@@ -13,11 +13,11 @@ import Add_event from "./pages/Add_event";
 import Manage_events from "./pages/Manage_events";
 import Upgrade_resume from "./pages/Upgrade_resume";
 
+/*Defines the client-side route structure and wraps the app in a BrowserRouter. */
 function App() {
   return (
-    <BrowserRouter basename="/Application_Hub">
+    <BrowserRouter basename="/">
       <Routes>
-       
           <Route path="/" element={<Splash />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

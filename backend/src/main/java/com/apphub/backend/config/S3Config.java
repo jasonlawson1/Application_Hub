@@ -21,6 +21,7 @@ public class S3Config {
     @Value("${AWS_REGION}")
     private String region;
 
+    /* Creates an S3Client bean configured with AWS credentials */
     @Bean
     public S3Client s3Client() {
         AwsBasicCredentials awsCreds = AwsBasicCredentials.create(accessKey, secretKey);
@@ -30,6 +31,7 @@ public class S3Config {
                 .build();
     }
 
+    /** Creates an S3Presigner bean used to generate pre-signed S3 URLs. */
     @Bean
     public S3Presigner s3Presigner() {
         AwsBasicCredentials awsCreds = AwsBasicCredentials.create(accessKey, secretKey);

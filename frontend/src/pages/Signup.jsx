@@ -1,8 +1,10 @@
+import API_BASE from "../config";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Signup.css";
 
 
+/*Renders the signup form and creates a new user account. */
 function Signup() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -14,12 +16,14 @@ function Signup() {
   });
   const [errorMessage, setErrorMessage] = useState("");
 
-  
+
+  /*Updates the form state when the user types in an input field. */
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
 
+  /*Validates and submits the signup form, then redirects to login on success. */
   const handleSubmit = async(e) => {
     e.preventDefault();
 
@@ -39,10 +43,10 @@ function Signup() {
       setErrorMessage("Passwords do not match.");
       return;
     }
-   
+
 
      try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/signup`, {
+        const response = await fetch(`${API_BASE}/api/signup`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -56,7 +60,7 @@ function Signup() {
         // Success
         navigate("/login"); // Redirect after signup
         } else {
-       
+
         setErrorMessage(data.message || "Signup failed");
         }
         } catch (err) {
@@ -71,11 +75,11 @@ function Signup() {
 <div className="sign_up_background">
     <div className="signup_modal">
       <div className="signup_modal_content">
-       
+
 
         {/* Left side */}
         <div className="left_side">
-         
+
           <h1>Create an account</h1>
           {errorMessage && <p className="error_message">{errorMessage}</p>}
           <form id="signup_form" onSubmit={handleSubmit}>
@@ -161,3 +165,4 @@ function Signup() {
 }
 
 export default Signup;
+

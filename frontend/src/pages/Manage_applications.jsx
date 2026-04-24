@@ -1,9 +1,11 @@
+import API_BASE from "../config";
 import "../styles/Manage_applications.css";
 import { useState, useEffect } from "react";
 import { useNavigate,Link } from "react-router-dom";
 
 
 
+/*Renders a filterable table of the user's job applications with edit and delete actions. */
 function Manage_applications(){
     const navigate = useNavigate();
     const userId = localStorage.getItem("userId");
@@ -14,17 +16,19 @@ function Manage_applications(){
     const[deletedAppId, setDeletedAppId] = useState(null);
     const [noApplicationsMessage, setNoApplicationsMessage] = useState("");
 
+    /*Returns applications filtered by the currently selected status. */
     const filteredApplications = applications.filter((app)=>{
         if(statusFilter==="All")return true;
         return app.status===statusFilter;
     });
 
+    /*Fetches all applications for the current user from the backend on mount. */
     useEffect(()=>{
         const fetchApplications = async ()=>{
             try{
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/applications/user/${userId}`);
+                const response = await fetch(`${API_BASE}/api/applications/user/${userId}`);
                 const data = await response.json();
-                
+
 
                 if(!response.ok){
                     setNoApplicationsMessage("No applications found.");
@@ -43,9 +47,10 @@ function Manage_applications(){
     },[userId]);
 
 
+    /*Sends a DELETE request for the selected application and removes it from the local list. */
     const handleDelete = async ()=>{
         try {
-            const response =await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/applications/${deletedAppId}`, {
+            const response =await fetch(`${API_BASE}/api/applications/${deletedAppId}`, {
             method: "DELETE"
         });
 
@@ -54,13 +59,13 @@ function Manage_applications(){
             setShowDeleteModule(false);
             return;
         }
-    
 
-        
+
+
         } catch (error) {
             console.log(error);
         }
-       
+
 
     };
 
@@ -111,20 +116,20 @@ function Manage_applications(){
                             ):
                             (filteredApplications.map((app)=>(
                                 <tr key={app.id}>
-                                    
+
                                     <td>
                                         <span className={`status ${app.status.toLowerCase()}`}>
                                             {app.status}
                                         </span>
                                     </td>
-                                    
+
                                     <td>{app.company}</td>
                                     <td>{app.jobTitle}</td>
                                     <td>{app.location}</td>
                                     <td>{app.dateApplied}</td>
                                     <td>{app.deadline}</td>
                                     <td>{app.notes}</td>
-                                    <td> 
+                                    <td>
                                         <button type="button" className="kebab" onClick={()=> setOpenMenuId(openMenuId === app.id ? null : app.id)}>
                                         ⋮
                                         </button>
@@ -132,14 +137,14 @@ function Manage_applications(){
                                             <div className="kebab_dropdown">
                                                 <button className="edit" type="button" onClick={()=>navigate(`/Edit_application/${app.id}`)}>Edit</button>
 
-                                                <button className="delete" type="button" onClick={()=> 
+                                                <button className="delete" type="button" onClick={()=>
                                                 {setShowDeleteModule(true);
                                                 setDeletedAppId(app.id);
                                                 }}>Delete</button>
                                             </div>
                                         )}
                                     </td>
-                                
+
                                 </tr>
                             )))}
                         </tbody>
@@ -150,26 +155,26 @@ function Manage_applications(){
                             <div className="delete_modal_content">
                                 <span>Are you sure you want to delete this application?</span>
                                 <div className="delete_modal_actions">
-                                    <button type="button" className="delete_modal_buttons" 
+                                    <button type="button" className="delete_modal_buttons"
                                     onClick={()=>{
                                         handleDelete();
                                     }}>Yes</button>
 
                                     <button type="button" className="delete_modal_buttons" onClick={()=> setShowDeleteModule(false)}>No</button>
                                 </div>
-                               
+
                             </div>
                         </div>
-                    )}     
+                    )}
 
                 </div>
             </div>
-             
-            
-                    
-            </div>        
+
+
+            </div>
 
         </div>
 
     )
 }export default Manage_applications;
+

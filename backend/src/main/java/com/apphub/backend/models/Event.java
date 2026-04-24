@@ -13,7 +13,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
@@ -25,8 +25,10 @@ public class Event {
     private LocalTime startTime;
     private String notes;
 
+    /*Creates a new Event instance with default field values. */
     public Event(){}
 
+    /*Creates a new Event with all fields populated. */
     public Event(String title,  String location, LocalDate date, LocalTime startTime, String notes){
         this.title = title;
         this.location = location;
@@ -35,62 +37,74 @@ public class Event {
         this.notes = notes;
     }
 
+    /*Returns the unique identifier of this event. */
     public Long getId(){
         return id;
     }
 
+    /*Returns the user who owns this event. */
     public User getUser(){
         return user;
     }
 
+    /*Returns the title of this event. */
     public String getTitle(){
         return title;
     }
 
-     public String getLocation(){
+    /*Returns the location of this event. */
+    public String getLocation(){
         return location;
     }
 
-     public LocalDate getDate(){
+    /*Returns the date of this event. */
+    public LocalDate getDate(){
         return date;
     }
 
-
+    /*Returns the start time of this event. */
     public LocalTime getStartTime(){
         return startTime;
     }
 
+    /*Returns any additional notes for this event. */
     public String getNotes(){
         return notes;
     }
 
+    /*Sets the unique identifier of this event. */
     public void setId(Long id){
         this.id = id;
     }
 
+    /*Sets the user who owns this event. */
     public void setUser(User user){
         this.user=user;
     }
 
+    /*Sets the title of this event. */
     public void setTitle(String title){
         this.title = title;
     }
 
+    /*Sets the location of this event. */
     public void setLocation(String location){
         this.location = location;
     }
 
-     public void setDate(LocalDate date){
+    /*Sets the date of this event. */
+    public void setDate(LocalDate date){
         this.date = date;
     }
 
-
+    /*Sets the start time of this event. */
     public void setStartTime(LocalTime startTime){
         this.startTime = startTime;
     }
 
+    /*Sets additional notes for this event. */
     public void setNotes(String notes){
         this.notes = notes;
     }
-    
+
 }
